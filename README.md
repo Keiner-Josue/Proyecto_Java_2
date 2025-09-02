@@ -42,7 +42,8 @@ Crear un software (web y/o móvil) que sirva como **plataforma intermediaria** e
 Proyecto analizado y documentado por:  
 
 Keiner Josue Barbosa Calderon - 192502
-
+Maria Laura Contreras Trillos - 192521
+Paula Andrea Echavez Vargas - 192487
 
 ---
 
