@@ -1,13 +1,13 @@
 # 📊 Análisis del Proyecto: Distrisoft
 
-> 🚀 **Distrisoft** es una propuesta tecnológica que busca conectar proveedores de alimentos con negocios locales como mercados, panaderías y tiendas, ofreciendo una solución rápida, confiable y digital en la mano de todos los usuarios.
+> 🚀 **Distrisoft** es una propuesta tecnológica que busca conectar proveedores de alimentos con negocios locales como panaderías, ofreciendo una solución rápida, confiable y digital en la mano de todos los usuarios.
 > Porque pedir insumos no debería ser más complicado que pedir un domicilio 😅.  
 
 ---
 
 ## 📝 Problema Detectado
 
-Los negocios pequeños (mercados, panaderías, restaurantes locales) enfrentan dificultades para:  
+Los negocios pequeños (panaderías) enfrentan dificultades para:  
 - 🤝 Encontrar proveedores confiables.  
 - 📦 Controlar inventarios de manera eficiente.  
 - 🕒 Ahorrar tiempo en la gestión de compras.  
