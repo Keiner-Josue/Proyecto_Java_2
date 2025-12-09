@@ -36,6 +36,11 @@ public class DistrisoftService implements Serializable {
     }
     public List<Cliente> getClientes() { return clientes; }
 
+    public void eliminarCliente(int clienteId) {
+        clientes.removeIf(c -> c.getId() == clienteId);
+        saveClientes();
+    }
+
     // CATALOGO
     public void agregarItem(ItemCatalogo item) {
         catalogo.add(item);
@@ -43,8 +48,17 @@ public class DistrisoftService implements Serializable {
     }
     public List<ItemCatalogo> getCatalogo() { return catalogo; }
 
+    public void eliminarItem(int itemId) {
+        catalogo.removeIf(i -> i.getId() == itemId);
+        saveCatalogo();
+    }
+
     public Optional<ItemCatalogo> encontrarItemPorId(int id) {
         return catalogo.stream().filter(i -> i.getId() == id).findFirst();
+    }
+
+    public ItemCatalogo buscarItem(String nombre) {
+        return catalogo.stream().filter(i -> i.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(null);
     }
 
     // ORDENES
@@ -67,6 +81,11 @@ public class DistrisoftService implements Serializable {
                     o.setEstado(estado);
                     saveOrdenes();
                 });
+    }
+
+    public void eliminarOrden(int ordenId) {
+        ordenes.removeIf(o -> o.getId() == ordenId);
+        saveOrdenes();
     }
 
     // Persistencia básica
@@ -105,5 +124,11 @@ public class DistrisoftService implements Serializable {
         for (DetalleOrden d : detalles) o.addDetalle(d);
         agregarOrden(o);
         return o;
+    }
+
+    // convenience overload to accept an Orden directly
+    public Orden crearOrden(Orden orden) {
+        agregarOrden(orden);
+        return orden;
     }
 }
