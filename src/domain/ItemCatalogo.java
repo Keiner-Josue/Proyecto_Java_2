@@ -11,12 +11,25 @@ public class ItemCatalogo implements Serializable {
     private String nombre;
     private double precio;
     private int stock;
+    private String unidad; // e.g., "kg", "g", "L", "ml", "u"
+    private double unidadCantidad; // e.g., 1.0 (1 kg), 500.0 (500 g), 0.5 (0.5 L)
 
     public ItemCatalogo(String nombre, double precio, int stock) {
         this.id = COUNTER.getAndIncrement();
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
+        this.unidad = "u";
+        this.unidadCantidad = 1.0;
+    }
+
+    public ItemCatalogo(String nombre, double precio, int stock, String unidad, double unidadCantidad) {
+        this.id = COUNTER.getAndIncrement();
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.unidad = unidad == null ? "u" : unidad;
+        this.unidadCantidad = unidadCantidad <= 0 ? 1.0 : unidadCantidad;
     }
 
     public int getId() { return id; }
@@ -27,8 +40,13 @@ public class ItemCatalogo implements Serializable {
     public int getStock() { return stock; }
     public void setStock(int stock) { this.stock = stock; }
 
+    public String getUnidad() { return unidad; }
+    public void setUnidad(String unidad) { this.unidad = unidad; }
+    public double getUnidadCantidad() { return unidadCantidad; }
+    public void setUnidadCantidad(double unidadCantidad) { this.unidadCantidad = unidadCantidad; }
+
     @Override
     public String toString() {
-        return id + " - " + nombre + " ($" + precio + ") [" + stock + "]";
+        return id + " - " + nombre + " ($" + precio + ") [" + stock + "] (" + unidadCantidad + unidad + ")";
     }
 }

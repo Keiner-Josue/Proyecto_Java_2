@@ -19,6 +19,10 @@ public class Cliente implements Serializable {
         this.direccion = direccion;
     }
 
+    public Cliente(String nombre, String telefono) {
+        this(nombre, telefono, "");
+    }
+
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { 
