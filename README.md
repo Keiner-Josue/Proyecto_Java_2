@@ -140,4 +140,4 @@ Paula Andrea Echavez Vargas - 192487
 
 > “La clave no es solo vender productos, sino conectar necesidades con soluciones.” ✨
 
-![Logo]("C:\Users\LENOVO\OneDrive\Desktop\Proyecto_Java_2\assets\UML.png")
+![UML](./assets/UML.png)
