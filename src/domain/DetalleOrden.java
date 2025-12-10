@@ -19,6 +19,7 @@ public class DetalleOrden implements Serializable {
 
     @Override
     public String toString() {
+        // Línea resumen del detalle: nombre, cantidad y subtotal
         return item.getNombre() + " x" + cantidad + " = $" + getSubtotal();
     }
 }

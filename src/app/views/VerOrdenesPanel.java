@@ -22,6 +22,7 @@ public class VerOrdenesPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
+        // Tabla resumen de órdenes
         DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Fecha", "Estado", "Items"}, 0);
         JTable tabla = new JTable(model);
 
@@ -33,7 +34,7 @@ public class VerOrdenesPanel extends JPanel {
             model.setRowCount(0);
             for (Orden orden : controller.listarOrdenes()) {
                 String fechaStr = orden.getFecha() != null ? orden.getFecha().format(dtf) : "";
-                // build items summary without currency formatting inside domain
+                // resumen textual de los ítems (ya implementado en domain)
                 String resumen = orden.getResumen();
                 model.addRow(new Object[]{orden.getId(), fechaStr, orden.getEstado(), resumen});
             }

@@ -13,11 +13,12 @@ import java.util.ArrayList;
 public class ClientesPanel extends JPanel {
 
     public ClientesPanel(DistrisoftService service) {
-
+        // Panel para gestionar clientes: formulario + tabla de resultados
         ClienteController controller = new ClienteController(service);
 
         setLayout(new BorderLayout());
 
+        // Campos del formulario de nuevo cliente
         JTextField txtNombre = new JTextField(15);
         JTextField txtTelefono = new JTextField(15);
         JTextField txtDireccion = new JTextField(20);
@@ -32,14 +33,17 @@ public class ClientesPanel extends JPanel {
         form.add(txtDireccion);
         form.add(btnAgregar);
 
+        // Tabla para mostrar clientes
         DefaultTableModel model = new DefaultTableModel(new Object[]{"Nombre", "Teléfono", "Dirección"}, 0);
         JTable tabla = new JTable(model);
 
+        // Cargar clientes iniciales desde el servicio
         List<Cliente> clientes = new ArrayList<>(controller.listarClientes());
         for (Cliente c : clientes) model.addRow(new Object[]{c.getNombre(), c.getTelefono(), c.getDireccion()});
 
         JScrollPane scroll = new JScrollPane(tabla);
 
+        // Acción del botón Agregar: validaciones mínimas y delegar creación
         btnAgregar.addActionListener(e -> {
             String nombre = txtNombre.getText().trim();
             String telefono = txtTelefono.getText().trim();
@@ -62,8 +66,8 @@ public class ClientesPanel extends JPanel {
                 return;
             }
 
+            // Delegar creación y actualizar vista
             controller.agregarCliente(nombre, telefono, direccion);
-            // refresh list and table
             clientes.clear();
             clientes.addAll(controller.listarClientes());
             model.setRowCount(0);

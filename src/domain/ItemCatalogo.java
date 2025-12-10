@@ -47,6 +47,7 @@ public class ItemCatalogo implements Serializable {
 
     @Override
     public String toString() {
+        // Representación compacta usada en combos y debugging
         return id + " - " + nombre + " ($" + precio + ") [" + stock + "] (" + unidadCantidad + unidad + ")";
     }
 }

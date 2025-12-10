@@ -16,11 +16,12 @@ import java.util.List;
 public class CrearOrdenPanel extends JPanel {
 
     public CrearOrdenPanel(DistrisoftService service) {
-
+        // Panel para crear órdenes: selección de cliente, selección de producto y cantidad
         OrdenController controller = new OrdenController(service);
 
         setLayout(new BorderLayout());
 
+        // Combo con catálogo (se recarga cuando se muestra el panel)
         DefaultComboBoxModel<ItemCatalogo> comboModel = new DefaultComboBoxModel<>();
         for (ItemCatalogo item : controller.getCatalogo()) {
             comboModel.addElement(item);
@@ -47,7 +48,7 @@ public class CrearOrdenPanel extends JPanel {
             }
         });
 
-        // Modelo y combo para clientes
+        // Modelo y combo para clientes (se recarga al mostrar el panel)
         ClienteController clienteController = new ClienteController(service);
         DefaultComboBoxModel<Cliente> clienteModel = new DefaultComboBoxModel<>();
         for (Cliente c : clienteController.listarClientes()) clienteModel.addElement(c);
@@ -86,6 +87,7 @@ public class CrearOrdenPanel extends JPanel {
 
         List<DetalleOrden> detalles = new ArrayList<>();
 
+        // Agregar un detalle al pedido con validaciones (cantidad y stock)
         btnAgregar.addActionListener(e -> {
             ItemCatalogo item = (ItemCatalogo) comboItems.getSelectedItem();
             if (item == null) {
@@ -119,6 +121,7 @@ public class CrearOrdenPanel extends JPanel {
             txtCantidad.setText("");
         });
 
+        // Eliminar detalle seleccionado antes de guardar
         JButton btnEliminarDetalle = new JButton("Eliminar seleccionado");
         btnEliminarDetalle.addActionListener(e -> {
             int sel = listaDetalles.getSelectedIndex();
@@ -127,13 +130,14 @@ public class CrearOrdenPanel extends JPanel {
                 return;
             }
             DetalleOrden d = detalleModel.getElementAt(sel);
-            int confirm = JOptionPane.showConfirmDialog(this, "Eliminar '" + d.getItem().getNombre() + " x " + d.getCantidad() + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "Eliminar '" + d.getItem().getNombre() + " x" + d.getCantidad() + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 detalleModel.remove(sel);
                 detalles.remove(sel);
             }
         });
 
+        // Guardar la orden: validar que existan detalles y cliente, delegar al controller
         btnGuardar.addActionListener(e -> {
             if (detalles.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Agregue al menos un producto a la orden.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -151,6 +155,7 @@ public class CrearOrdenPanel extends JPanel {
             detalles.clear();
         });
 
+        // Crear un cliente rápido mediante diálogos
         btnNuevoCliente.addActionListener(e -> {
             String nombre = JOptionPane.showInputDialog(this, "Nombre del cliente:");
             if (nombre == null) return; // cancel
@@ -175,6 +180,7 @@ public class CrearOrdenPanel extends JPanel {
             if (clienteModel.getSize() > 0) comboClientes.setSelectedIndex(clienteModel.getSize() - 1);
         });
 
+        // Composición de la UI
         JPanel arriba = new JPanel();
         arriba.add(new JLabel("Cliente:"));
         arriba.add(comboClientes);

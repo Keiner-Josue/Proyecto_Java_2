@@ -46,6 +46,7 @@ public class Orden implements Serializable {
     }
 
     public double getTotal() {
+        // Suma de subtotales de los detalles
         return detalles.stream().mapToDouble(DetalleOrden::getSubtotal).sum();
     }
 
@@ -61,6 +62,7 @@ public class Orden implements Serializable {
 
     @Override
     public String toString() {
+        // Resumen compacto para logs
         return "Orden " + id + " - " + cliente.getNombre() + " - " + estado + " - $" + getTotal();
     }
 }

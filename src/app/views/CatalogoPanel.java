@@ -13,13 +13,14 @@ import java.awt.*;
 public class CatalogoPanel extends JPanel {
 
     public CatalogoPanel(DistrisoftService service) {
-
+        // Panel para gestionar el catálogo de productos
         setLayout(new BorderLayout());
 
         DefaultTableModel model = new DefaultTableModel(new Object[]{
             "Producto", "Precio", "Stock", "Presentación"
         }, 0);
 
+        // Cargar items desde el servicio y convertir precio a formato local
         List<ItemCatalogo> items = new ArrayList<>();
         NumberFormat moneda = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("es-CO"));
         for (ItemCatalogo item : service.getCatalogo()) {
@@ -30,7 +31,7 @@ public class CatalogoPanel extends JPanel {
 
         JTable tabla = new JTable(model);
 
-        // Formulario para agregar nuevos productos
+        // Formulario para agregar nuevos productos con validaciones básicas
         JPanel form = new JPanel();
         JTextField txtNombre = new JTextField(15);
         JTextField txtPrecio = new JTextField(8);
@@ -78,6 +79,7 @@ public class CatalogoPanel extends JPanel {
                 String unidad = (String) comboUnidad.getSelectedItem();
                 double unidadCantidad = ((Number) spinnerUnidad.getValue()).doubleValue();
                 ItemCatalogo nuevo = new ItemCatalogo(nombre, precio, stock, unidad, unidadCantidad);
+                //Guardar en servicio y actualizar tabla
                 service.agregarItem(nuevo);
                 items.add(nuevo);
                 model.addRow(new Object[]{nuevo.getNombre(), moneda.format(nuevo.getPrecio()), nuevo.getStock(), unidadCantidad + unidad});

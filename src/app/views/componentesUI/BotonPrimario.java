@@ -7,6 +7,7 @@ public class BotonPrimario extends JButton {
 
     public BotonPrimario(String texto) {
         super(texto);
+        // Botón estilizado reutilizable: fondo, color de texto y fuente
         setBackground(new Color(0, 120, 215));
         setForeground(Color.WHITE);
         setFocusPainted(false);

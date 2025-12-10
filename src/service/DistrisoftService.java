@@ -29,6 +29,9 @@ public class DistrisoftService implements Serializable {
         loadAll();
     }
 
+    // Servicio que actúa como repositorio en memoria + persistencia simple por serialización.
+    // Las operaciones modifican las listas y llaman a métodos de guardado.
+
     // CLIENTES
     public void agregarCliente(Cliente c) {
         clientes.add(c);
@@ -63,6 +66,7 @@ public class DistrisoftService implements Serializable {
 
     // ORDENES
     public void agregarOrden(Orden o) {
+        // Al agregar una orden, disminuir stock de cada item y persistir
         for (DetalleOrden d : o.getDetalles()) {
             ItemCatalogo item = d.getItem();
             item.setStock(item.getStock() - d.getCantidad());

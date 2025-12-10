@@ -12,6 +12,7 @@ public class Cliente implements Serializable {
     private String telefono;
     private String direccion;
 
+    // Constructor principal: asigna id secuencial y campos
     public Cliente(String nombre, String telefono, String direccion) {
         this.id = COUNTER.getAndIncrement();
         this.nombre = nombre;
@@ -19,6 +20,7 @@ public class Cliente implements Serializable {
         this.direccion = direccion;
     }
 
+    // Conveniencia sin dirección (vacía)
     public Cliente(String nombre, String telefono) {
         this(nombre, telefono, "");
     }
@@ -34,6 +36,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
+        // Muestra identificador y nombre, útil en combos y logs
         return id + " - " + nombre;
     }
 }
